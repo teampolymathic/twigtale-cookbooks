@@ -3,8 +3,7 @@ node[:deploy].each do |app_name, deploy_config|
   app_root = "#{deploy_config[:deploy_to]}/current"
 
   execute 'migrate' do
-    cwd app_root
-    user 'deploy'
-    command "RAILS_ENV=production with_env bundle exec rake migrate:all" 
+    user 'ubuntu'
+    command "sudo su - deploy -c 'cd #{app_root} && RAILS_ENV=production with_env bundle exec rake migrate:all'" 
   end
 end
