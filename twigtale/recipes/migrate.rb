@@ -4,6 +4,7 @@ node[:deploy].each do |app_name, deploy_config|
 
   execute 'migrate' do
     cwd app_root
+    user 'deploy'
     command "RAILS_ENV=production with_env bundle exec rake migrate:all" 
   end
 end
